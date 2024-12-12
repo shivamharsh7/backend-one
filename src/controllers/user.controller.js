@@ -60,4 +60,20 @@ const {fullName, email, username, password} = req.body;
 
 })
 
-export {registerUser} 
+const getUser = asyncHandler(async(req,res)=>{
+    const username = req.query.username
+
+    if(username.trim() ==="") throw new ApiError(400,"User name req")
+
+    const userName = await User.findOne({username: username}).select(
+        "-password -watchHistory"
+    )
+
+    if( !userName) throw new ApiError(409,"user is not there");
+
+    return res.status(200).json(
+        new ApiResponse(204,userName,"user is present")
+    )
+})
+
+export {registerUser, getUser} 
