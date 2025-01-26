@@ -16,7 +16,6 @@ connectDB()
         console.log(`Server is running at port : ${process.env.PORT}`);
         
     })
-    app
 }) 
 .catch((err)=>{
     console.log("Mongoo DB failed !!",err)
